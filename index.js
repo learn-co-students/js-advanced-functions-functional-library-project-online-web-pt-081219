@@ -86,21 +86,7 @@ const fi = (function() {
       }
     },
 
-    uniq: function(array, isSorted, callback) {
-      // let uniqArr = []
-      // if (isSorted === false) {array.sort()}
-      // for (let el of array) {
-      //   if (callback) {
-      //     if (!uniqArr.find(e => callback(e) === callback(el))) {
-      //       uniqArr.push(el)
-      //     }
-      //   } else {
-      //     if (!uniqArr.find(e => e === el)) {
-      //       uniqArr.push(el)
-      //     }
-      //   }
-      // }
-      // return uniqArr 
+    uniq: function(array, isSorted, callback) { 
       let result = []
       if (isSorted === false) {array.sort()}
       for (const el of array) {
