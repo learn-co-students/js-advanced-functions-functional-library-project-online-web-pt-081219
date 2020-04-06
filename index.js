@@ -114,7 +114,7 @@ const fi = (function() {
         let badArray =[];
         for (var i = 0; i < array.length; i++){
           let temp = callback(array[i]);
-          if (badArray.find(temp) === undefined){
+          if (badArray.indexOf(temp) === -1){
             goodArray.push(array[i]);
             badArray.push(temp);
           }
