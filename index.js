@@ -1,27 +1,58 @@
-const fi = (function() {
-  return {
-    libraryMethod: function() {
-      return 'Start by reading https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0'
-    },
+// @ts-check
 
-    each: function() {
+const fi = {
+  /**
+   * @template Item
+   * @param {Iterable<Item> | { [key: string]: Item }} collection
+   * @param {(value: Item, key: string | number, collection: Iterable<Item> | { [key: string]: Item }) => void} callback
+   */
+  each(collection, callback) {
+    if (Symbol.iterator in collection) {
+      let i = 0;
 
-    },
+      for (let item of collection) {
+        callback(item, i, collection);
+        i++;
+      }
+    } else {
+      let entries = Object.entries(collection);
 
-    map: function() {
+      for (let entry of entries) {
+        callback(entry[1], entry[0], collection);
+      }
+    }
 
-    },
+    return collection;
+  },
 
-    reduce: function() {
+  map(collection, callback) {
+    let newArray = [];
 
-    },
+    fi.each(collection, (item, i, collection) => {
+      newArray.push(callback(item, i, collection));
+    });
 
-    functions: function() {
+    return newArray;
+  },
 
-    },
+  /**
+   * @template Item
+   * @template Output
+   * @param {Iterable<Item> | { [key: string]: Item }} collection
+   * @param {(accum: Output, value: Item, collection: object) => Output} callback
+   * @param {Output} [accumulator]
+   * @returns Output
+   */
+  reduce(collection, callback, accumulator) {
+    fi.each(collection, (value, key, collection) => {
+      if (accumulator === undefined) {
+        accumulator = value;
+      } else {
+        accumulator = callback(accumulator, value, collection);
+      }
+    });
+    return accumulator;
+  },
 
-
-  }
-})()
-
-fi.libraryMethod()
+  functions() {},
+};
