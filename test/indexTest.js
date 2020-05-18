@@ -288,6 +288,7 @@ describe("index.js", function () {
     it("correctly flattens a ludicrously nested array", function () {
       const nestedArr = [1, [2, 3], [[4, 5], 6, [7, [8, 9]]]];
       const flatArr = fi.flatten(nestedArr);
+
       expect(arraysEqual(flatArr, [1, 2, 3, 4, 5, 6, 7, 8, 9])).to.equal(true);
     });
 
@@ -316,7 +317,7 @@ describe("index.js", function () {
 
     it("removes duplicate values from an array when an iteratee is applied", function () {
       const newArr = fi.uniq([1, 2, 2, 3, 4, 6, 9], false, (val) => val % 3);
-      console.log(newArr);
+      // console.log(newArr);
       expect(arraysEqual(newArr, [1, 2, 3])).to.equal(true);
     });
   });
